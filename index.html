@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta name="theme-color" content="#090617">
+<title>THE LITTLE UNIVERSE — A Secret Journey</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+:root{--pink:#ff8fca;--violet:#a58bff;--gold:#ffe6a8;--ink:#090617}
+*{box-sizing:border-box}html,body{margin:0;width:100%;min-height:100%;background:var(--ink);color:#fff;font-family:'DM Sans',sans-serif;overflow-x:hidden}
+body{min-height:100svh;background:radial-gradient(ellipse at 50% 100%,#24113e 0,#0d0920 48%,#05040d 100%)}
+#stars{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.screen{position:relative;z-index:1;min-height:100svh;display:none;align-items:center;justify-content:center;padding:28px 18px 40px;text-align:center;overflow:hidden}
+.screen.active{display:flex;animation:fade .8s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h1,h2,.serif{font-family:'Playfair Display',serif;font-weight:500}
+h1{font-size:clamp(2.5rem,10vw,5rem);line-height:1.02;margin:16px 0;color:#fff;text-shadow:0 0 28px #d17dff70}
+h2{font-size:clamp(2rem,7vw,3.4rem);margin:10px 0 16px}
+p{line-height:1.75;color:#d8cde9;max-width:570px;margin:12px auto}
+.eyebrow{letter-spacing:.32em;text-transform:uppercase;font-size:.65rem;color:#d7a9ff}
+.btn{border:1px solid #e8b8ff70;color:white;background:linear-gradient(120deg,#a84dba55,#5c48a655);padding:14px 23px;border-radius:999px;font-weight:700;letter-spacing:.04em;cursor:pointer;box-shadow:0 0 24px #b15bff25;transition:.25s;margin:7px}
+.btn:active{transform:scale(.96)}.btn:hover{box-shadow:0 0 35px #d77aff65;transform:translateY(-2px)}
+.btn.secondary{background:#ffffff0a;border-color:#ffffff30}
+.portal-wrap{perspective:1000px;margin:22px auto 28px;width:min(75vw,300px);height:min(75vw,300px);display:grid;place-items:center}
+.portal{width:100%;height:100%;border-radius:50%;position:relative;transform-style:preserve-3d;animation:float 5s ease-in-out infinite;cursor:pointer}
+.ring{position:absolute;inset:0;border-radius:50%;border:2px solid #f5baff;box-shadow:0 0 15px #f58aff, inset 0 0 25px #a45cff;transform:rotateX(68deg);animation:spin 9s linear infinite}
+.ring:nth-child(2){inset:13px;border-color:#a8a4ff;transform:rotateY(68deg);animation-duration:13s;animation-direction:reverse}
+.ring:nth-child(3){inset:27px;border-color:#ffe5b1;transform:rotateX(75deg) rotateY(30deg);animation-duration:17s}
+.core{position:absolute;inset:28%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffb5e8 15%,#a45aff 48%,#25104d 75%);box-shadow:0 0 45px #e88cff,0 0 100px #984eff;animation:pulse 2.5s infinite}
+@keyframes spin{to{rotate:360deg}}@keyframes pulse{50%{scale:1.13;filter:brightness(1.3)}}@keyframes float{50%{transform:translateY(-12px) rotateY(12deg)}}
+.orb{position:absolute;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#ffb6e8 25%,#8c53ff 75%);box-shadow:0 0 30px #bb74ff}
+.scene-card{width:min(92vw,650px);padding:clamp(22px,5vw,42px);border:1px solid #e9c6ff35;border-radius:28px;background:linear-gradient(145deg,#ffffff12,#ffffff04);box-shadow:0 25px 90px #0008,inset 0 1px #fff2;backdrop-filter:blur(14px);position:relative}
+.scene-card:before{content:"";position:absolute;inset:8px;border:1px solid #fff1;border-radius:21px;pointer-events:none}
+.scene-card p{font-size:.97rem}
+.moon-stage{height:270px;position:relative;margin:12px auto;perspective:900px}
+.moon{position:absolute;width:160px;height:160px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 30% 28%,#fff8df,#e6c9ff 18%,#9e73d8 52%,#39265f 78%);box-shadow:0 0 60px #c28aff90}
+.moon:after{content:"";position:absolute;width:150px;height:150px;border:1px solid #f6d7ff99;border-radius:50%;left:25px;top:-15px;transform:rotateX(70deg) rotateZ(-20deg);box-shadow:0 0 18px #e5b4ff}
+.planet{position:absolute;width:42px;height:42px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff,#ffb0d9 28%,#a74dba);box-shadow:0 0 25px #ff9cda;left:calc(50% + 105px);top:45%;animation:orbit 7s linear infinite;transform-origin:-105px 10px}
+@keyframes orbit{to{transform:rotate(360deg)}}
+.choice{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:22px auto}
+.choice button{flex:1 1 130px;max-width:220px}
+.memory-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:24px auto;max-width:470px}
+.memory{min-height:130px;border:1px solid #fff3;background:#ffffff0b;border-radius:18px;padding:18px 12px;cursor:pointer;transition:.25s;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.memory:hover,.memory.open{background:#d88aff20;border-color:#e7aaff;transform:translateY(-3px)}
+.memory .symbol{font-size:2rem}.memory small{color:#cbbbdc;line-height:1.5}
+.progress{height:4px;background:#ffffff20;border-radius:10px;max-width:320px;margin:20px auto;overflow:hidden}.progress span{display:block;height:100%;background:linear-gradient(90deg,#ff91d0,#a78aff);width:0;transition:.3s}
+.star-field{height:260px;max-width:520px;margin:15px auto;position:relative;border:1px solid #fff2;border-radius:22px;background:radial-gradient(ellipse,#30174b88,#080714);overflow:hidden;touch-action:manipulation}
+.collect{position:absolute;border:0;background:transparent;font-size:27px;cursor:pointer;filter:drop-shadow(0 0 10px #fff);animation:twinkle 1s infinite alternate}
+@keyframes twinkle{to{transform:scale(1.35);filter:drop-shadow(0 0 18px #ffb4e9)}}
+.book{width:min(90vw,560px);min-height:300px;margin:20px auto;perspective:1200px}
+.page{min-height:300px;padding:30px 25px;border-radius:8px 22px 22px 8px;background:linear-gradient(100deg,#f4e6d4,#fff5e9 10%,#f7e7d8);color:#4d3152;box-shadow:12px 18px 40px #0008;transform-origin:left;animation:pageIn .8s ease}
+.page p{color:#624b65}.page h2{color:#74426e;font-size:2.1rem}
+@keyframes pageIn{from{transform:rotateY(-25deg);opacity:0}to{transform:rotateY(0);opacity:1}}
+.gift{width:190px;height:170px;margin:30px auto;position:relative;cursor:pointer;transform-style:preserve-3d;perspective:700px}
+.gift-box{position:absolute;bottom:0;width:190px;height:125px;background:linear-gradient(135deg,#a84991,#552c80);border:1px solid #ffc5ec;box-shadow:0 15px 40px #0007}
+.gift-box:before{content:"";position:absolute;left:78px;width:30px;height:100%;background:#ffe3ad}
+.gift-lid{position:absolute;top:15px;left:-8px;width:206px;height:35px;background:linear-gradient(90deg,#e78bc9,#8d4caa);border:1px solid #ffd1ee;transform-origin:left;transition:1s;z-index:2}
+.gift.open .gift-lid{transform:rotateZ(-25deg) rotateY(-35deg) translateY(-55px)}
+.gift-bow{position:absolute;top:-8px;left:68px;width:55px;height:35px;border:8px solid #ffe3ad;border-radius:50% 50% 0 50%;transform:rotate(20deg);z-index:3}
+.final-heart{font-size:90px;filter:drop-shadow(0 0 28px #ff70c9);animation:heartbeat 1.2s infinite}
+@keyframes heartbeat{50%{transform:scale(1.16)}}
+#toast{position:fixed;z-index:10;bottom:18px;left:50%;transform:translateX(-50%);background:#241532dd;border:1px solid #fff3;padding:10px 17px;border-radius:30px;font-size:.8rem;color:#f9e8ff;opacity:0;transition:.3s;pointer-events:none}
+#toast.show{opacity:1}
+#sound{position:fixed;right:14px;top:14px;z-index:8;border:1px solid #fff4;background:#ffffff12;color:#fff;border-radius:50%;width:42px;height:42px}
+#back{position:fixed;left:14px;top:14px;z-index:8;border:1px solid #fff4;background:#ffffff12;color:#fff;border-radius:30px;padding:10px 14px;display:none}
+@media(max-width:390px){.scene-card{padding:22px 17px}.memory{min-height:115px}.moon-stage{height:230px}}
+</style>
+</head>
+<body>
+<canvas id="stars"></canvas><button id="sound" aria-label="sound">♫</button><button id="back">← Kembali</button><div id="toast"></div>
+
+<section class="screen active" id="s0">
+ <div>
+  <div class="eyebrow">A tiny universe made just for you</div>
+  <div class="portal-wrap" id="portalTap"><div class="portal"><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="core"></div></div></div>
+  <h1>THE LITTLE<br><span style="color:#ffaddc">UNIVERSE</span></h1>
+  <p>Ada sebuah semesta kecil yang menyimpan kejutan. Katanya, cuma orang yang penasaran yang bisa masuk.</p>
+  <button class="btn" onclick="go(1)">MASUK KE SEMESTA →</button>
+  <div class="eyebrow" style="margin-top:18px;letter-spacing:.16em">Best experienced with sound on</div>
+ </div>
+</section>
+
+<section class="screen" id="s1"><div class="scene-card">
+ <div class="eyebrow">Chapter 01 · The arrival</div><h2>Selamat datang,<br>penjelajah kecil.</h2>
+ <div class="moon-stage"><div class="moon"></div><div class="planet"></div></div>
+ <p>Di tempat ini, waktu berjalan lebih pelan. Bintang-bintang menyimpan pesan, planet punya rahasia, dan setiap pilihan akan membuka bagian cerita yang berbeda.</p>
+ <p><b style="color:#ffd6f0">Sebelum lanjut, pilih cara menjelajahmu.</b></p>
+ <div class="choice"><button class="btn" onclick="choose('dreamer')">Aku si pemimpi ✦</button><button class="btn secondary" onclick="choose('explorer')">Aku si pemberani ☄</button></div>
+</div></section>
+
+<section class="screen" id="s2"><div class="scene-card">
+ <div class="eyebrow">Chapter 02 · The observatory</div><h2>Empat pintu rahasia</h2>
+ <p>Sentuh setiap benda untuk membuka potongan rahasia. Tidak harus berurutan. Ada satu pesan tersembunyi di balik semuanya.</p>
+ <div class="memory-grid">
+  <div class="memory" onclick="reveal(this,0)"><span class="symbol">☾</span><b>Bulan sunyi</b><small>Sentuh untuk membuka</small></div>
+  <div class="memory" onclick="reveal(this,1)"><span class="symbol">✧</span><b>Bintang jatuh</b><small>Sentuh untuk membuka</small></div>
+  <div class="memory" onclick="reveal(this,2)"><span class="symbol">♆</span><b>Planet biru</b><small>Sentuh untuk membuka</small></div>
+  <div class="memory" onclick="reveal(this,3)"><span class="symbol">♡</span><b>Ruang hati</b><small>Sentuh untuk membuka</small></div>
+ </div>
+ <div class="progress"><span id="prog"></span></div><p id="revealCount" style="font-size:.8rem">0 / 4 rahasia ditemukan</p>
+ <button class="btn" id="memoryNext" disabled onclick="go(3)" style="opacity:.4">BUKA PETA BINTANG →</button>
+</div></section>
+
+<section class="screen" id="s3"><div class="scene-card">
+ <div class="eyebrow">Chapter 03 · Star catcher</div><h2>Tangkap 7 bintang</h2>
+ <p>Bintang-bintang kecil bersembunyi. Ketuk sampai terkumpul tujuh. Ada pesan khusus setelah semuanya ditemukan.</p>
+ <div class="star-field" id="starField"></div>
+ <div class="progress"><span id="starProg"></span></div><p id="starCount">0 / 7 bintang</p>
+ <button class="btn" id="starNext" disabled onclick="go(4)" style="opacity:.4">LANJUTKAN PERJALANAN →</button>
+</div></section>
+
+<section class="screen" id="s4"><div class="scene-card">
+ <div class="eyebrow">Chapter 04 · A little letter</div><h2>Surat dari semesta</h2>
+ <div class="book"><div class="page" id="letterPage"><div class="eyebrow" style="color:#a16b9d">A note for you</div><h2>Hai, kamu.</h2><p>Kalau hari ini terasa panjang, semoga halaman kecil ini bisa jadi tempat istirahat sebentar.</p><p>Di antara jutaan bintang, kamu tetap punya cahaya sendiri. Tidak perlu jadi paling terang untuk tetap berarti.</p><p style="font-family:'Playfair Display';font-size:1.3rem">— semesta kecilmu</p></div></div>
+ <button class="btn" onclick="nextLetter()">BALIK HALAMAN ↗</button>
+</div></section>
+
+<section class="screen" id="s5"><div class="scene-card">
+ <div class="eyebrow">Chapter 05 · The choice</div><h2>Kalau bisa memilih…</h2>
+ <p>Semesta memberimu satu kesempatan untuk membuka sebuah dunia. Pilih dengan hati-hati, ya.</p>
+ <div class="choice" style="flex-direction:column;align-items:center">
+  <button class="btn" onclick="endingChoice('sunrise')">Melihat matahari terbit di planet asing</button>
+  <button class="btn secondary" onclick="endingChoice('ocean')">Menyelam di lautan penuh bintang</button>
+  <button class="btn secondary" onclick="endingChoice('garden')">Menemukan taman bunga bercahaya</button>
+ </div>
+ <p id="choiceResult" style="min-height:40px"></p>
+ <button class="btn" id="choiceNext" disabled onclick="go(6)" style="opacity:.4">MENUJU KEJUTAN TERAKHIR →</button>
+</div></section>
+
+<section class="screen" id="s6"><div class="scene-card">
+ <div class="eyebrow">Chapter 06 · One last secret</div><h2>Ada sesuatu untukmu.</h2>
+ <p>Kotak ini sudah menunggu sejak awal perjalanan. Ketuk untuk membukanya.</p>
+ <div class="gift" id="gift" onclick="openGift()"><div class="gift-box"></div><div class="gift-lid"></div><div class="gift-bow"></div></div>
+ <p id="giftText">Psst… jangan buru-buru. Kejutan terbaik kadang perlu dibuka pelan-pelan.</p>
+ <button class="btn" id="giftNext" style="display:none" onclick="go(7)">LIHAT PESAN TERAKHIR →</button>
+</div></section>
+
+<section class="screen" id="s7"><div class="scene-card">
+ <div class="eyebrow">The end · and a new beginning</div>
+ <div class="final-heart">♥</div><h2>Terima kasih sudah<br>menjelajah.</h2>
+ <p id="finalText">Satu semesta kecil, tujuh bintang, dan satu pesan: semoga kamu selalu menemukan alasan untuk tersenyum, bahkan di hari yang paling biasa.</p>
+ <p style="color:#ffcae8;font-family:'Playfair Display';font-size:1.3rem">You are someone's favorite constellation.</p>
+ <button class="btn" onclick="restart()">ULANGI DARI AWAL ↻</button>
+ <button class="btn secondary" onclick="secret()">???</button>
+</div></section>
+
+<script>
+const $=id=>document.getElementById(id);let current=0,style='dreamer',found=0,stars=0,letter=0,choiceMade=false,giftOpened=false,audioOn=false,ctx=null;
+function go(n){$('s'+current).classList.remove('active');current=n;$('s'+n).classList.add('active');$('back').style.display=n>0&&n<7?'block':'none';if(n===3&&stars===0)spawnStars();window.scrollTo(0,0)}
+$('back').onclick=()=>go(Math.max(0,current-1));
+function choose(v){style=v;toast(v==='dreamer'?'Semesta menyambut si pemimpi.':'Semesta membuka jalan untuk si pemberani.');go(2)}
+const secrets=[
+ ['☾','Bulan sunyi','Kamu boleh beristirahat. Tidak semua hal harus selesai hari ini.'],
+ ['✧','Bintang jatuh','Harapan kecil tetap layak diperjuangkan, meski belum ada yang melihatnya.'],
+ ['♆','Planet biru','Dunia ini luas. Masih banyak hal indah yang belum kamu temui.'],
+ ['♡','Ruang hati','Jangan lupa memberi dirimu sendiri kebaikan yang sering kamu berikan ke orang lain.']
+];
+function reveal(el,i){if(el.classList.contains('open'))return;el.classList.add('open');el.innerHTML='<span class="symbol">'+secrets[i][0]+'</span><b>'+secrets[i][1]+'</b><small>'+secrets[i][2]+'</small>';found++;$('prog').style.width=(found/4*100)+'%';$('revealCount').textContent=found+' / 4 rahasia ditemukan';if(found===4){$('memoryNext').disabled=false;$('memoryNext').style.opacity=1;toast('Semua rahasia terbuka! Peta bintang ditemukan.')}tone(620,.12)}
+function spawnStars(){let field=$('starField');field.innerHTML='';for(let i=0;i<7;i++){let b=document.createElement('button');b.className='collect';b.textContent='✦';b.style.left=(7+Math.random()*82)+'%';b.style.top=(8+Math.random()*76)+'%';b.style.color=['#fff2c4','#ffc2e9','#c8b9ff'][i%3];b.onclick=()=>{if(b.dataset.hit)return;b.dataset.hit='1';b.style.transform='scale(2)';b.style.opacity=0;stars++;$('starCount').textContent=stars+' / 7 bintang';$('starProg').style.width=(stars/7*100)+'%';tone(500+stars*70,.1);if(stars===7){$('starNext').disabled=false;$('starNext').style.opacity=1;toast('Kamu berhasil mengumpulkan semua bintang!')}};field.appendChild(b)}}
+const letters=[
+ ['Halaman kedua.','Kadang kita sibuk mencari hal besar sampai lupa bahwa hal sederhana juga bisa jadi keajaiban: udara pagi, lagu favorit, tawa kecil, atau seseorang yang mengingat hal-hal kecil tentang kita.'],
+ ['Halaman ketiga.','Kalau kamu pernah merasa tertinggal, ingat: setiap bintang punya waktunya sendiri untuk bersinar. Kamu tidak sedang berlomba dengan siapa pun.'],
+ ['Halaman terakhir.','Jaga rasa ingin tahumu. Tetap berani mencoba hal baru. Dan kalau suatu hari kamu lupa betapa berharganya dirimu, buka lagi semesta kecil ini.']
+];
+function nextLetter(){letter++;if(letter<4){let x=letters[letter-1];$('letterPage').innerHTML='<div class="eyebrow" style="color:#a16b9d">A note for you · 0'+(letter+1)+'</div><h2>'+x[0]+'</h2><p>'+x[1]+'</p><p style="font-family:Playfair Display;font-size:1.2rem">Dengan hangat, semesta.</p>';tone(480,.12)}else{go(5)}}
+function endingChoice(v){choiceMade=true;let t={sunrise:'Langit jingga menyambutmu. Awal yang baru selalu mungkin.',ocean:'Di bawah lautan bintang, semua terasa tenang. Kamu aman untuk bermimpi.',garden:'Bunga-bunga bercahaya bermekaran. Hal indah bisa tumbuh dari tempat yang tak terduga.'};$('choiceResult').textContent=t[v];$('choiceNext').disabled=false;$('choiceNext').style.opacity=1;tone(720,.18)}
+function openGift(){if(giftOpened)return;giftOpened=true;$('gift').classList.add('open');$('giftText').textContent='Kejutanmu: kamu baru saja menyelesaikan perjalanan kecil ini. Semoga ada satu hal baik yang ikut kamu bawa setelah menutup halaman ini.';$('giftNext').style.display='inline-block';confetti();tone(880,.3)}
+function secret(){toast('Rahasia terbuka: kamu bisa mulai lagi kapan pun kamu mau.');confetti()}
+function restart(){found=0;stars=0;letter=0;choiceMade=false;giftOpened=false;$('prog').style.width='0';$('revealCount').textContent='0 / 4 rahasia ditemukan';$('memoryNext').disabled=true;$('memoryNext').style.opacity=.4;document.querySelectorAll('.memory').forEach((el,i)=>el.innerHTML='<span class="symbol">'+secrets[i][0]+'</span><b>'+secrets[i][1]+'</b><small>Sentuh untuk membuka</small>');document.querySelectorAll('.memory').forEach(el=>el.classList.remove('open'));$('starField').innerHTML='';$('starProg').style.width='0';$('starCount').textContent='0 / 7 bintang';$('starNext').disabled=true;$('starNext').style.opacity=.4;$('gift').classList.remove('open');$('giftText').textContent='Psst… jangan buru-buru. Kejutan terbaik kadang perlu dibuka pelan-pelan.';$('giftNext').style.display='none';$('choiceResult').textContent='';$('choiceNext').disabled=true;$('choiceNext').style.opacity=.4;$('letterPage').innerHTML='<div class="eyebrow" style="color:#a16b9d">A note for you</div><h2>Hai, kamu.</h2><p>Kalau hari ini terasa panjang, semoga halaman kecil ini bisa jadi tempat istirahat sebentar.</p><p>Di antara jutaan bintang, kamu tetap punya cahaya sendiri. Tidak perlu jadi paling terang untuk tetap berarti.</p><p style="font-family:Playfair Display;font-size:1.3rem">— semesta kecilmu</p>';go(0)}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),2300)}
+function tone(freq,dur){try{if(!audioOn)return;ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();let o=ctx.createOscillator(),g=ctx.createGain();o.frequency.value=freq;o.type='sine';g.gain.setValueAtTime(.06,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+dur);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur)}catch(e){}}
+$('sound').onclick=()=>{audioOn=!audioOn;$('sound').textContent=audioOn?'♫':'♪';toast(audioOn?'Suara interaksi aktif':'Suara dimatikan');if(audioOn)tone(660,.2)};
+function confetti(){for(let i=0;i<45;i++){let d=document.createElement('i');d.textContent=['✦','♥','✧'][i%3];d.style.cssText=`position:fixed;z-index:9;left:${Math.random()*100}vw;top:-20px;color:${['#ff9fd7','#d1a8ff','#ffe6a8'][i%3]};font-size:${12+Math.random()*18}px;pointer-events:none;transition:transform ${2+Math.random()*2}s linear,opacity 3s`;document.body.appendChild(d);requestAnimationFrame(()=>{d.style.transform=`translate(${Math.random()*100-50}px,${innerHeight+80}px) rotate(${Math.random()*500}deg)`;d.style.opacity=0});setTimeout(()=>d.remove(),4200)}}
+$('portalTap').onclick=()=>{tone(300,.4);go(1)};
+const canvas=$('stars'),c=canvas.getContext('2d');let particles=[];function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;c.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);particles=Array.from({length:Math.min(150,Math.floor(innerWidth/4))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.5+.3,a:Math.random(),s:Math.random()*.006+.002}))}window.addEventListener('resize',resize);resize();function animate(){c.clearRect(0,0,innerWidth,innerHeight);particles.forEach(p=>{p.a+=p.s;if(p.a>1||p.a<.15)p.s*=-1;c.fillStyle=`rgba(255,225,255,${p.a})`;c.beginPath();c.arc(p.x,p.y,p.r,0,Math.PI*2);c.fill()});requestAnimationFrame(animate)}animate();
+</script>
+</body></html>
