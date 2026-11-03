@@ -1,219 +1,358 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Amel ❤️</title>
+<title>Be Mine Completely ❤️</title>
+
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;background:#050505;color:white;
- font-family:Arial,sans-serif;overflow-x:hidden;
- text-align:center;
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at center,#30000b,#080006 65%,#000);
+  color:white;
+  font-family:Arial,sans-serif;
+  text-align:center;
+  overflow-x:hidden;
 }
-.page{display:none;min-height:100vh;padding:35px 20px;
- align-items:center;justify-content:center;flex-direction:column}
-.page.active{display:flex}
-h1{color:#ff2020;text-shadow:0 0 15px red,0 0 35px #a00000}
-p{line-height:1.8;color:#eee}
 button{
- background:#a00000;color:white;border:1px solid red;
- padding:14px 25px;border-radius:30px;margin:8px;
- font-size:15px;font-weight:bold;cursor:pointer;
- box-shadow:0 0 15px #ff000055;
+  border:1px solid #ff345b;
+  background:linear-gradient(145deg,#ff1744,#85001d);
+  color:white;
+  padding:14px 27px;
+  border-radius:13px;
+  font-size:17px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 20px #ff1744, inset 0 0 10px #ff8296;
+  transition:.25s;
+  margin:8px;
 }
-button:active{transform:scale(.94)}
+button:hover{transform:translateY(-4px) scale(1.06)}
+button:active{transform:scale(.95)}
+.screen{
+  min-height:100vh;
+  padding:35px 18px;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  animation:appear .7s ease;
+}
+#home{display:flex}
+h1{
+  color:#ff4568;
+  text-shadow:0 0 10px #ff1744,0 0 30px #ff1744;
+}
+h2{color:#ff6580}
+p{line-height:1.8}
 .card{
- background:#151010;border:1px solid #8b0000;
- border-radius:22px;padding:25px;width:min(100%,390px);
- box-shadow:0 0 30px #a0000033;
+  width:min(92%,540px);
+  padding:28px 20px;
+  border:1px solid #ff345b;
+  border-radius:22px;
+  background:linear-gradient(145deg,#21000b,#090006);
+  box-shadow:0 0 30px #b90032, inset 0 0 25px #390014;
 }
 .heart{
- font-size:100px;color:red;
- text-shadow:0 0 15px red,0 0 45px red;
- animation:beat 1s infinite;
+  font-size:100px;
+  animation:heartbeat 1s infinite;
+  filter:drop-shadow(0 0 22px red);
 }
-@keyframes beat{50%{transform:scale(1.2)}}
-.envelope{font-size:110px;cursor:pointer;animation:float 2s infinite}
-@keyframes float{50%{transform:translateY(-15px)}}
-.small{font-size:12px;color:#aaa}
-.fall{
- position:fixed;top:-30px;color:#ff1010;
- font-weight:bold;pointer-events:none;
- animation:drop linear forwards;z-index:5;
- text-shadow:0 0 10px red;
+.big-heart{
+  font-size:clamp(100px,30vw,190px);
+  animation:heartbeat .8s infinite;
+  text-shadow:0 0 35px red;
 }
-@keyframes drop{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-#progress{width:100%;height:7px;background:#333;border-radius:10px}
-#bar{height:7px;width:0;background:red;border-radius:10px}
+.love-rain{
+  position:fixed;
+  top:-30px;
+  color:#ff315b;
+  font-weight:bold;
+  pointer-events:none;
+  z-index:5;
+  animation:fall linear forwards;
+  text-shadow:0 0 12px red;
+}
+@keyframes fall{
+  to{transform:translateY(110vh) rotate(360deg);opacity:0}
+}
+@keyframes heartbeat{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.15)}
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.message{
+  color:#ffb2c2;
+  font-size:16px;
+  white-space:pre-line;
+  text-align:left;
+}
+.progress{
+  width:100%;
+  height:8px;
+  background:#410014;
+  border-radius:20px;
+  margin:20px 0;
+}
+#bar{
+  height:100%;
+  width:0;
+  background:#ff315b;
+  border-radius:20px;
+  transition:.4s;
+}
+input{
+  padding:13px;
+  width:90%;
+  border-radius:10px;
+  border:1px solid #ff315b;
+  background:#130008;
+  color:white;
+  margin:10px;
+  font-size:16px;
+}
 </style>
 </head>
+
 <body>
 
-<audio id="music" loop>
- <source src="lagu.mp3" type="audio/mpeg">
-</audio>
+<audio id="song" src="ssstik.io_1793713810360.mp3" preload="auto" loop></audio>
 
-<section id="one" class="page active">
- <div class="small">A PRIVATE MESSAGE FOR SOMEONE SPECIAL</div>
- <h1>HEY, AMEL...</h1>
- <p>Someone has prepared something for you.</p>
- <div class="envelope" onclick="openLetter()">💌</div>
- <p>Tap the letter to open it.</p>
- <button onclick="openLetter()">OPEN MY LETTER</button>
+<!-- HALAMAN UTAMA -->
+<section class="screen" id="home">
+  <div class="card">
+    <div class="heart">❤️</div>
+    <h1>BE MINE COMPLETELY?</h1>
+    <p>Are you ready to be loved endlessly?</p>
+    <p style="color:#ff9bad">Choose carefully, sayang...</p>
+    <button onclick="startYes()">YES, I AM ❤️</button>
+    <button onclick="showNo()">NO 💔</button>
+    <p style="font-size:12px;color:#a66">A little website made with love.</p>
+  </div>
 </section>
 
-<section id="two" class="page">
- <h1>WELCOME, AMEL ❤️</h1>
- <div class="card">
-  <div class="heart">♥</div>
-  <h2>YOU ARE SPECIAL.</h2>
-  <p>Di antara banyak orang di dunia, ada satu orang yang selalu punya tempat istimewa.</p>
-  <p>Dan orang itu adalah kamu, Amel.</p>
- </div>
- <button onclick="go('three')">NEXT SECRET →</button>
+<!-- JAWABAN YES -->
+<section class="screen" id="yes">
+  <div class="card">
+    <div class="heart">💗</div>
+    <h1>FINALLY, SAYANG!</h1>
+    <p>Lo milih YES? Serius nih?</p>
+    <p>Berarti sekarang kita punya perjalanan kecil yang harus lo selesaikan.</p>
+    <button onclick="nextQuestion()">MULAI PERJALANAN ❤️</button>
+  </div>
 </section>
 
-<section id="three" class="page">
- <h1>HOW MUCH DO YOU KNOW?</h1>
- <div class="card">
-  <p>Siapa orang yang sedang dibuatkan website ini?</p>
-  <button onclick="correct()">AMEL ❤️</button>
-  <button onclick="wrong()">ORANG LAIN</button>
-  <p id="answer"></p>
- </div>
+<!-- QUIZ -->
+<section class="screen" id="quiz">
+  <div class="card">
+    <h2 id="questionTitle">QUESTION 1</h2>
+    <div class="progress"><div id="bar"></div></div>
+    <p id="questionText"></p>
+    <div id="answers"></div>
+    <p id="feedback"></p>
+  </div>
 </section>
 
-<section id="four" class="page">
- <h1>ONE LITTLE QUESTION...</h1>
- <div class="card">
-  <div class="heart">♥</div>
-  <h2>AMEL, DO YOU LOVE ME?</h2>
-  <button onclick="yes()">YES, OF COURSE ❤️</button>
-  <button onclick="no()">NO...</button>
- </div>
+<!-- SURAT -->
+<section class="screen" id="letter">
+  <div class="card">
+    <div class="heart">💌</div>
+    <h1>FOR YOU, SAYANG.</h1>
+    <p class="message" id="letterText"></p>
+    <button onclick="showFinal()">BUKA PESAN TERAKHIR ❤️</button>
+  </div>
 </section>
 
-<section id="five" class="page">
- <h1>YOU SAID YES?!</h1>
- <div class="heart">❤️</div>
- <div class="card">
-  <h2>AMEL, YOU'RE MY FAVORITE PERSON.</h2>
-  <p>Kalau aku bisa memilih lagi, aku tetap ingin mengenal kamu.</p>
-  <p>Aku suka hal-hal kecil tentang kamu. Cara kamu berbicara, bercanda, dan menjadi diri sendiri.</p>
-  <button onclick="go('six')">UNLOCK ANOTHER MESSAGE</button>
- </div>
+<!-- FINAL YES -->
+<section class="screen" id="finalYes">
+  <div class="card">
+    <div class="big-heart">❤️</div>
+    <h1>YOU ARE MY FAVORITE PERSON.</h1>
+    <p>Gue nggak butuh alasan buat terus sayang sama lo.</p>
+    <p>Gue cuma mau kita terus saling memilih, bahkan di hari-hari yang nggak mudah.</p>
+    <h2>I LOVE YOU, SAYANG.</h2>
+    <button onclick="show('home')">ULANGI LAGI ↻</button>
+  </div>
 </section>
 
-<section id="six" class="page">
- <h1>SECRET MESSAGE 🔐</h1>
- <div class="card">
-  <p id="secret">Tekan tombol untuk membuka pesan rahasia.</p>
-  <button onclick="secretMessage()">OPEN SECRET</button>
-  <button onclick="secretMessage()">ANOTHER ONE</button>
-  <button onclick="go('seven')">FINAL LETTER →</button>
- </div>
-</section>
-
-<section id="seven" class="page">
- <h1>MY LETTER FOR AMEL</h1>
- <div class="card">
-  <p>
-   Dear Amel,<br><br>
-   Aku mungkin nggak selalu bisa menemukan kata-kata
-   yang tepat untuk menjelaskan betapa berharganya kamu.
-   Tapi aku ingin kamu tahu kalau kehadiranmu membuat
-   banyak hari terasa lebih menyenangkan.<br><br>
-   Terima kasih sudah menjadi dirimu sendiri.
-   Aku nggak butuh kamu menjadi sempurna.
-   Aku cuma ingin kita terus saling mengenal,
-   saling menghargai, dan saling menjaga.<br><br>
-   You are my favorite person. ❤️
-  </p>
-  <div class="heart">♥</div>
-  <h2>ALWAYS YOURS, AMEL.</h2>
-  <button onclick="go('one')">READ AGAIN ↻</button>
- </div>
-</section>
-
-<section id="eight" class="page">
- <h1>KENAPA NO, AMEL? ❤️</h1>
- <div class="heart">♥</div>
- <div class="card">
-  <h2>ARE YOU SURE?</h2>
-  <p>Jangan buru-buru, Amel. Masih ada banyak pesan yang belum kamu buka.</p>
-  <button onclick="noSecret()">TAP FOR SURPRISE</button>
-  <p id="noText"></p>
-  <button onclick="go('five')">OKAY, I LOVE YOU ❤️</button>
- </div>
+<!-- JAWABAN NO -->
+<section class="screen" id="no">
+  <div class="card">
+    <div class="big-heart">❤️</div>
+    <h1>KENAPA NO, SAYANG?</h1>
+    <h2>LU MILIK GUA ❤️</h2>
+    <h1 style="font-size:25px">SAYANG.. BALAS HATI GUA, GUA CINTA SAMA LO!!</h1>
+    <p id="noText">Jangan pilih NO terus dong...</p>
+    <button onclick="moreLove()">LOVE YOU MORE ❤️</button>
+    <button onclick="againNo()">KENAPA NO LAGI?</button>
+    <button onclick="show('home')">KEMBALI</button>
+  </div>
 </section>
 
 <script>
-const pages=document.querySelectorAll('.page');
-function go(id){
- pages.forEach(p=>p.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- window.scrollTo(0,0);
+const screens=document.querySelectorAll('.screen');
+
+function show(id){
+  screens.forEach(s=>s.style.display='none');
+  document.getElementById(id).style.display='flex';
+  window.scrollTo(0,0);
 }
-function openLetter(){
- document.getElementById('music').play().catch(()=>{});
- go('two');
+
+function rainLove(){
+  const words=["LOVE YOU","I LOVE YOU","SAYANG","❤️","LU MILIK GUA","FOREVER"];
+  for(let i=0;i<30;i++){
+    setTimeout(()=>{
+      const el=document.createElement('div');
+      el.className='love-rain';
+      el.textContent=words[Math.floor(Math.random()*words.length)];
+      el.style.left=Math.random()*100+'vw';
+      el.style.fontSize=(14+Math.random()*23)+'px';
+      el.style.animationDuration=(3+Math.random()*4)+'s';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),7500);
+    },i*100);
+  }
 }
-function correct(){
- document.getElementById('answer').innerText=
- "BENARRR!! JELAS AMEL LAH ❤️";
- setTimeout(()=>go('four'),1200);
+
+function showNo(){
+  show('no');
+  rainLove();
+  const audio=document.getElementById('song');
+  audio.currentTime=0;
+  audio.play().catch(()=>{});
 }
-function wrong(){
- document.getElementById('answer').innerText=
- "SALAHH! JAWABANNYA AMEL 😭";
+
+let loveCount=0;
+function moreLove(){
+  loveCount++;
+  rainLove();
+  document.getElementById('noText').textContent=
+  loveCount===1?"GUE BENERAN SAYANG SAMA LO!!":
+  "LOVE YOUUUUU!! JANGAN BOSEN SAMA GUE, YA. ❤️";
 }
-function yes(){
- go('five');
- rain();
+function againNo(){
+  rainLove();
+  document.getElementById('noText').textContent=
+  "MASIH NO JUGA?! GUE TETAP KIRIM LOVE YOU!! ❤️";
 }
-const secrets=[
- "Amel, kamu punya tempat spesial yang nggak bisa digantikan.",
- "Satu pesan darimu bisa bikin hariku lebih baik.",
- "Aku suka semua momen kecil yang kita punya.",
- "Kamu nggak harus sempurna untuk menjadi istimewa.",
- "Kalau hari kamu berat, semoga aku bisa jadi tempat cerita.",
- "I CHOOSE YOU, AMEL. ❤️",
- "Kamu adalah salah satu hal terbaik yang aku kenal."
-];
-let si=0;
-function secretMessage(){
- document.getElementById('secret').innerText=secrets[si%secrets.length];
- si++;
- rain();
-}
-const noSecrets=[
- "AMELLL, MASIH ADA PESAN BUAT KAMU ❤️",
- "KAMU TETAP SPESIAL, TAU NGGAK?",
- "ONE MORE SECRET: I LOVE YOUR SMILE.",
- "JANGAN LUPA BAHAGIA HARI INI.",
- "YOU'RE MY FAVORITE NOTIFICATION."
-];
-let ni=0;
-function noSecret(){
- document.getElementById('noText').innerText=noSecrets[ni%noSecrets.length];
- ni++;
- rain();
-}
-function no(){go('eight');rain()}
-function rain(){
- for(let i=0;i<35;i++){
-  let e=document.createElement('div');
-  e.className='fall';
-  e.innerText=['LOVE YOU ❤️','AMEL ♥','I LOVE YOU','♥','MY FAVORITE'][Math.floor(Math.random()*5)];
-  e.style.left=Math.random()*100+'vw';
-  e.style.animationDuration=(2+Math.random()*4)+'s';
-  e.style.fontSize=(14+Math.random()*15)+'px';
-  document.body.appendChild(e);
-  setTimeout(()=>e.remove(),6500);
+
+const questions=[
+ {
+  q:"Seberapa sayang lo sama gue?",
+  a:["Banget banget ❤️","Banyak banget 💗","Nggak bisa dihitung"],
+  f:"Jawaban lo bikin gue makin jatuh cinta."
+ },
+ {
+  q:"Kalau gue lagi kangen, lo bakal?",
+  a:["Nyamperin kalau bisa","Telepon gue","Kirim pesan panjang"],
+  f:"Gue suka kalau kita saling perhatian."
+ },
+ {
+  q:"Hal yang paling lo suka dari hubungan kita?",
+  a:["Cerita bareng","Ketawa bareng","Saling dukung"],
+  f:"Hal sederhana juga bisa jadi kenangan indah."
+ },
+ {
+  q:"Kalau kita lagi ada masalah?",
+  a:["Ngobrol baik-baik","Saling mendengarkan","Cari jalan keluarnya bareng"],
+  f:"Gue pengin kita belajar memahami satu sama lain."
+ },
+ {
+  q:"Terakhir... masih mau sama gue?",
+  a:["IYA, MAU BANGET ❤️","MAUUU!!","SELALU MAU 💍"],
+  f:"OKE. SEKARANG ADA PESAN BUAT LO."
  }
+];
+
+let current=0;
+
+function startYes(){
+  show('yes');
+}
+function nextQuestion(){
+  current=0;
+  show('quiz');
+  renderQuestion();
+}
+function renderQuestion(){
+  const q=questions[current];
+  document.getElementById('questionTitle').textContent=
+    "QUESTION "+(current+1)+" / 5";
+  document.getElementById('questionText').textContent=q.q;
+  document.getElementById('bar').style.width=(current/5*100)+"%";
+  document.getElementById('feedback').textContent="";
+  const answers=document.getElementById('answers');
+  answers.innerHTML="";
+  q.a.forEach(answer=>{
+    const btn=document.createElement('button');
+    btn.textContent=answer;
+    btn.onclick=()=>answerQuestion();
+    answers.appendChild(btn);
+  });
+}
+function answerQuestion(){
+  document.getElementById('feedback').textContent=
+    questions[current].f;
+  document.getElementById('bar').style.width=
+    ((current+1)/5*100)+"%";
+  const buttons=document.querySelectorAll('#answers button');
+  buttons.forEach(b=>b.disabled=true);
+  const next=document.createElement('button');
+  next.textContent=current===4?"BUKA SURAT GUE 💌":"LANJUT →";
+  next.onclick=()=>{
+    current++;
+    if(current<questions.length)renderQuestion();
+    else showLetter();
+  };
+  document.getElementById('answers').appendChild(next);
+}
+
+function showLetter(){
+  show('letter');
+  document.getElementById('letterText').textContent=
+`Sayang...
+
+Gue mungkin nggak selalu bisa jadi orang yang sempurna.
+Gue juga masih belajar buat memahami lo, memahami perasaan lo,
+dan jadi seseorang yang bisa lo percaya.
+
+Tapi ada satu hal yang pengin gue kasih tahu:
+gue bersyukur bisa kenal sama lo.
+
+Gue suka hal-hal kecil tentang kita.
+Obrolan random, candaan nggak jelas,
+cerita yang kadang panjang banget,
+dan momen sederhana yang mungkin kelihatannya biasa aja.
+
+Gue nggak mau hubungan kita cuma penuh kata-kata manis.
+Gue mau kita bisa saling menghargai,
+saling mendengarkan,
+dan tetap jadi diri sendiri.
+
+Kalau suatu hari kita berbeda pendapat,
+semoga kita tetap memilih buat bicara baik-baik.
+Kalau salah satu dari kita lagi capek,
+semoga kita bisa saling memberi ruang dan dukungan.
+
+Gue nggak tahu semua hal yang bakal terjadi ke depan.
+Tapi selama kita sama-sama mau berusaha,
+gue pengin terus membuat kenangan baik sama lo.
+
+Makasih udah hadir.
+Makasih udah jadi bagian dari cerita gue.
+
+I LOVE YOU, SAYANG. ❤️`;
+}
+function showFinal(){
+  show('finalYes');
+  rainLove();
 }
 </script>
+
 </body>
 </html>
